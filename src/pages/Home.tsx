@@ -208,6 +208,22 @@ export default function Home({ isDarkMode }: { isDarkMode: boolean }) {
     "MongoDB",
     "Firebase",
     "Python",
+    "HTML",
+    "CSS",
+    "Next.js",
+    "SQL",
+    "Mongoose",
+    "Bootstrap",
+    "React Native",
+    "Native",
+    "Figma",
+    "Angular",
+    "Docker",
+    "Kubernetes",
+    "Postman",
+    "Spring Boot",
+    "Java",
+    "Hibernate",
   ];
 
   const blogPosts = [

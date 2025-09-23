@@ -1,5 +1,28 @@
 import React from "react";
 import { motion } from "framer-motion";
+import {
+  SiReact,
+  SiTypescript,
+  SiJavascript,
+  SiNodedotjs,
+  SiTailwindcss,
+  SiGit,
+  SiMongodb,
+  SiFirebase,
+  SiPython,
+  SiHtml5,
+  SiCss3,
+  SiNextdotjs,
+  SiMongoose,
+  SiBootstrap,
+  SiFigma,
+  SiAngular,
+  SiDocker,
+  SiKubernetes,
+  SiPostman,
+  SiSpring,
+  SiMysql,
+} from "react-icons/si";
 
 interface EnhancedSkillBadgeProps {
   skill: string;
@@ -12,6 +35,55 @@ const EnhancedSkillBadge: React.FC<EnhancedSkillBadgeProps> = ({
   isDarkMode,
   proficiency = Math.floor(Math.random() * 3) + 3, // Random proficiency 3-5 for demo
 }) => {
+  const getSkillIcon = (skillName: string) => {
+    const iconMap: {
+      [key: string]: React.ComponentType<{ size?: number; className?: string }>;
+    } = {
+      React: SiReact,
+      TypeScript: SiTypescript,
+      JavaScript: SiJavascript,
+      "Node.js": SiNodedotjs,
+      "Tailwind CSS": SiTailwindcss,
+      Git: SiGit,
+      MongoDB: SiMongodb,
+      Firebase: SiFirebase,
+      Python: SiPython,
+      HTML: SiHtml5,
+      CSS: SiCss3,
+      "Next.js": SiNextdotjs,
+      // New technologies
+      SQL: SiMysql,
+      Mongoose: SiMongoose,
+      Bootstrap: SiBootstrap,
+      "React Native": SiReact,
+      Native: SiReact,
+      Figma: SiFigma,
+      Angular: SiAngular,
+      Docker: SiDocker,
+      Kubernetes: SiKubernetes,
+      Postman: SiPostman,
+      "Spring Boot": SiSpring,
+      // Fallbacks for technologies without specific icons
+      Express: SiNodedotjs,
+      PostgreSQL: SiMongodb,
+      AWS: SiNodedotjs,
+      GraphQL: SiReact,
+      Redux: SiReact,
+      Java: SiNodedotjs, // Using Node.js icon as fallback
+      Hibernate: SiMongodb, // Using MongoDB icon as fallback
+    };
+
+    const IconComponent = iconMap[skillName] || SiReact;
+    return (
+      <IconComponent
+        size={24}
+        className={`transition-colors duration-300 ${
+          isDarkMode ? "text-gray-300" : "text-gray-600"
+        }`}
+      />
+    );
+  };
+
   const getProficiencyColor = (level: number) => {
     switch (level) {
       case 5:
@@ -29,118 +101,78 @@ const EnhancedSkillBadge: React.FC<EnhancedSkillBadgeProps> = ({
     }
   };
 
-  const getProficiencyLabel = (level: number) => {
-    switch (level) {
-      case 5:
-        return "Expert";
-      case 4:
-        return "Advanced";
-      case 3:
-        return "Intermediate";
-      case 2:
-        return "Beginner";
-      case 1:
-        return "Learning";
-      default:
-        return "Intermediate";
-    }
-  };
-
   return (
     <motion.div
-      className={`relative group w-32 min-w-32 max-w-40 px-4 py-3 rounded-2xl backdrop-blur-xl border transition-all duration-500 cursor-pointer overflow-hidden ${
+      className={`relative group w-24 h-24 rounded-2xl backdrop-blur-xl border transition-all duration-500 cursor-pointer overflow-hidden ${
         isDarkMode
-          ? "bg-gradient-to-br from-gray-800/50 to-gray-900/50 border-gray-700/40 hover:border-indigo-400/60 hover:from-indigo-900/40 hover:to-purple-900/40"
-          : "bg-gradient-to-br from-gray-50/70 to-gray-100/70 border-gray-300/40 hover:border-indigo-300/60 hover:from-indigo-50/60 hover:to-purple-50/60"
-      } shadow-lg hover:shadow-indigo-500/25`}
+          ? "bg-gradient-to-br from-gray-800/60 to-gray-900/60 border-gray-700/50 hover:border-indigo-400/70 hover:from-indigo-900/50 hover:to-purple-900/50"
+          : "bg-gradient-to-br from-white/80 to-gray-50/80 border-gray-200/50 hover:border-indigo-300/70 hover:from-indigo-50/70 hover:to-purple-50/70"
+      } shadow-lg hover:shadow-xl hover:shadow-indigo-500/30`}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
     >
       {/* Background glow effect */}
       <div
         className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${getProficiencyColor(
           proficiency
-        )} opacity-0 group-hover:opacity-5 blur-xl transition-opacity duration-500`}
+        )} opacity-0 group-hover:opacity-10 blur-xl transition-opacity duration-500`}
       ></div>
 
-      {/* Proficiency indicator */}
-      <div className="absolute top-2 right-2 flex gap-0.5">
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            className={`w-1.5 h-1.5 rounded-full ${
-              i < proficiency
-                ? `bg-gradient-to-r ${getProficiencyColor(proficiency)}`
-                : isDarkMode
-                ? "bg-gray-600"
-                : "bg-gray-300"
-            }`}
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: i * 0.1, duration: 0.3 }}
-          />
-        ))}
-      </div>
-
       {/* Content */}
-      <div className="relative flex flex-col items-center gap-1">
-        <span
-          className={`font-semibold text-xs sm:text-sm transition-colors duration-300 text-center leading-tight ${
-            isDarkMode ? "text-gray-200" : "text-gray-700"
-          }`}
-        >
-          {skill}
-        </span>
-
-        <span
-          className={`text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center leading-tight ${
-            isDarkMode ? "text-gray-400" : "text-gray-500"
-          }`}
-        >
-          {getProficiencyLabel(proficiency)}
-        </span>
-
-        {/* Enhanced animated dot */}
+      <div className="relative flex flex-col items-center justify-center h-full gap-2 p-3">
+        {/* Technology Icon */}
         <motion.div
-          className={`w-2 h-2 rounded-full bg-gradient-to-r ${getProficiencyColor(
-            proficiency
-          )}`}
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.7, 1, 0.7],
-            boxShadow: [
-              "0 0 0 rgba(139, 92, 246, 0)",
-              "0 0 6px rgba(139, 92, 246, 0.4)",
-              "0 0 0 rgba(139, 92, 246, 0)",
-            ],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
+          className={`p-2 rounded-xl transition-all duration-300 ${
+            isDarkMode
+              ? "bg-gray-700/70 hover:bg-gray-600/90"
+              : "bg-gray-100/80 hover:bg-white/90"
+          } shadow-sm hover:shadow-md`}
+          whileHover={{ rotate: 5 }}
+        >
+          {getSkillIcon(skill)}
+        </motion.div>
+
+        {/* Proficiency indicator dots */}
+        <div className="flex gap-0.5">
+          {[...Array(5)].map((_, i) => (
+            <motion.div
+              key={i}
+              className={`w-1 h-1 rounded-full ${
+                i < proficiency
+                  ? `bg-gradient-to-r ${getProficiencyColor(proficiency)}`
+                  : isDarkMode
+                  ? "bg-gray-600"
+                  : "bg-gray-300"
+              }`}
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: i * 0.1, duration: 0.3 }}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Enhanced hover particles effect */}
       <div className="absolute inset-0 rounded-2xl overflow-hidden">
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          {[...Array(6)].map((_, i) => (
+          {[...Array(8)].map((_, i) => (
             <motion.div
               key={i}
-              className={`absolute w-1 h-1 bg-gradient-to-r ${getProficiencyColor(
+              className={`absolute w-0.5 h-0.5 bg-gradient-to-r ${getProficiencyColor(
                 proficiency
-              )} rounded-full opacity-0 group-hover:opacity-100`}
+              )} rounded-full opacity-0 group-hover:opacity-80`}
               style={{
-                top: `${Math.sin((i * 60 * Math.PI) / 180) * 20}px`,
-                left: `${Math.cos((i * 60 * Math.PI) / 180) * 20}px`,
+                top: `${Math.sin((i * 45 * Math.PI) / 180) * 25}px`,
+                left: `${Math.cos((i * 45 * Math.PI) / 180) * 25}px`,
               }}
               animate={{
-                scale: [0, 1.05, 0],
+                scale: [0, 1.2, 0],
                 opacity: [0, 0.8, 0],
               }}
               transition={{
-                duration: 2,
+                duration: 2.5,
                 repeat: Infinity,
-                delay: i * 0.2,
+                delay: i * 0.15,
                 ease: "easeOut",
               }}
             />
@@ -150,13 +182,15 @@ const EnhancedSkillBadge: React.FC<EnhancedSkillBadgeProps> = ({
 
       {/* Subtle border animation */}
       <motion.div
-        className="absolute inset-0 rounded-2xl border-2 border-transparent"
+        className="absolute inset-0 rounded-2xl border border-transparent"
         style={{
-          background: `conic-gradient(from 0deg, transparent, rgba(139, 92, 246, 0.25), transparent)`,
+          background: `conic-gradient(from 0deg, transparent, ${
+            isDarkMode ? "rgba(139, 92, 246, 0.3)" : "rgba(139, 92, 246, 0.2)"
+          }, transparent)`,
           backgroundClip: "padding-box",
         }}
         animate={{ rotate: 360 }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
       />
     </motion.div>
   );
