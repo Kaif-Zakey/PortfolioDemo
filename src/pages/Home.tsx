@@ -29,6 +29,7 @@ export default function Home({ isDarkMode }: { isDarkMode: boolean }) {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const [showAllProjects, setShowAllProjects] = useState(false);
 
@@ -116,8 +117,13 @@ export default function Home({ isDarkMode }: { isDarkMode: boolean }) {
 
       await emailjs.send(serviceId, templateId, templateParams, publicKey);
 
-      alert("Thank you for your message! I will get back to you soon.");
+      setShowSuccessMessage(true);
       setFormData({ name: "", email: "", message: "" });
+
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 5000);
     } catch (error) {
       console.error("Email sending failed:", error);
       alert(
@@ -1712,6 +1718,108 @@ export default function Home({ isDarkMode }: { isDarkMode: boolean }) {
           </motion.div>
         </div>
       </section>
+
+      {/* Modern Success Notification */}
+      {showSuccessMessage && (
+        <motion.div
+          initial={{ opacity: 0, y: -100, scale: 0.3 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -100, scale: 0.3 }}
+          transition={{
+            type: "spring",
+            stiffness: 400,
+            damping: 25,
+            duration: 0.6,
+          }}
+          className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50"
+        >
+          <div
+            className={`${
+              isDarkMode
+                ? "bg-gradient-to-r from-emerald-500/90 to-teal-600/90 border-emerald-400/50"
+                : "bg-gradient-to-r from-emerald-500/95 to-teal-600/95 border-emerald-300/50"
+            } backdrop-blur-xl border rounded-2xl px-6 py-4 shadow-2xl max-w-md mx-4`}
+          >
+            <div className="flex items-center gap-4">
+              {/* Success Icon */}
+              <motion.div
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ delay: 0.2, type: "spring", stiffness: 300 }}
+                className="flex-shrink-0"
+              >
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                  <svg
+                    className="w-6 h-6 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={3}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
+              </motion.div>
+
+              {/* Message Content */}
+              <div className="flex-1">
+                <motion.h3
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-white font-bold text-lg mb-1"
+                >
+                  Message Sent! 🎉
+                </motion.h3>
+                <motion.p
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="text-white/90 text-sm"
+                >
+                  Thank you for reaching out! I'll get back to you within 24
+                  hours.
+                </motion.p>
+              </div>
+
+              {/* Close Button */}
+              <motion.button
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 }}
+                onClick={() => setShowSuccessMessage(false)}
+                className="flex-shrink-0 w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors duration-200 group"
+              >
+                <svg
+                  className="w-4 h-4 text-white group-hover:scale-110 transition-transform duration-200"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </motion.button>
+            </div>
+
+            {/* Progress Bar */}
+            <motion.div
+              initial={{ scaleX: 1 }}
+              animate={{ scaleX: 0 }}
+              transition={{ duration: 5, ease: "linear" }}
+              className="mt-4 h-1 bg-white/30 rounded-full origin-left"
+            />
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 }
