@@ -273,7 +273,7 @@ export default function Home({ isDarkMode }: { isDarkMode: boolean }) {
     // Create a link element to download the PDF
     const link = document.createElement("a");
     link.href = cvFile;
-    link.download = "Kaif_Zaki_CV.pdf";
+    link.download = "Kaif-Zaki_CV.pdf";
     link.target = "_blank";
     document.body.appendChild(link);
     link.click();
