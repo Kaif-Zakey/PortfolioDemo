@@ -11,7 +11,7 @@ import ecommerce from "../assets/ecommerce.png";
 import portfolio from "../assets/portfolio.png";
 import calculator from "../assets/calculator.png";
 import connect4Game from "../assets/connect4game.png";
-import cvFile from "../assets/lib/Kaif_Zaki_CV.pdf";
+import cvFile from "../assets/lib/Kaif-Zaki_CV.pdf";
 import {
   FaGithub,
   FaLinkedin,
