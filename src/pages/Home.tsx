@@ -866,14 +866,14 @@ export default function Home({ isDarkMode }: { isDarkMode: boolean }) {
                         isDarkMode ? "text-white" : "text-black"
                       }`}
                     >
-                      Senior Frontend Developer
+                       Frontend Developer
                     </h4>
                     <p
                       className={`text-sm font-medium ${
                         isDarkMode ? "text-gray-400" : "text-gray-600"
                       }`}
                     >
-                      Tech Corp Inc. • 2020 - Present
+                      IJSE. • 2025 - Present
                     </p>
                   </div>
                   <div className="w-3 h-3 bg-gradient-to-r from-green-400 to-green-600 rounded-full animate-pulse"></div>
@@ -918,14 +918,14 @@ export default function Home({ isDarkMode }: { isDarkMode: boolean }) {
                         isDarkMode ? "text-white" : "text-black"
                       }`}
                     >
-                      Frontend Developer
+                      Web Developer
                     </h4>
                     <p
                       className={`text-sm font-medium ${
                         isDarkMode ? "text-gray-400" : "text-gray-600"
                       }`}
                     >
-                      Web Solutions Ltd. • 2018 - 2020
+                      IJSE • 2022 - 2025
                     </p>
                   </div>
                   <div className="w-3 h-3 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full animate-pulse"></div>
