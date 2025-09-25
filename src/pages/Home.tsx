@@ -1457,7 +1457,7 @@ export default function Home({ isDarkMode }: { isDarkMode: boolean }) {
                       />
                     </motion.a>
                     <motion.a
-                      href="https://www.linkedin.com/in/kaif-zakey-727397332"
+                      href="https://www.linkedin.com/in/kaif-zaki/"
                       className={`w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-sm border transition-all duration-300 ${
                         isDarkMode
                           ? "bg-gray-800/50 border-gray-700/50 hover:border-indigo-400/70"
